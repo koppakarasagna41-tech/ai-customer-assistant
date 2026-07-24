@@ -1,0 +1,6 @@
+{
+  "name": "Enterprise React Frontend Template",
+  "description": "Production-ready enterprise React 19 frontend boilerplate featuring React Router, Auth Context, Axios interceptors, Zod validation, Tailwind CSS, and Dark Mode.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

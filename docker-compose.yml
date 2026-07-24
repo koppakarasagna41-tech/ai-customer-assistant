@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=development
+      - DEBUG=true
+      - PORT=8000
+      - DATABASE_URL=sqlite:///./app.db
+      - JWT_SECRET=YOUR_SUPER_SECRET_KEY_FOR_LOCAL_DEVELOPMENT_COMPLIANCE_2026
+      - JWT_ALGORITHM=HS256
+      - FRONTEND_URL=http://localhost:3000
+    volumes:
+      - ./backend/app:/app/app
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000/api/v1
+    depends_on:
+      - backend
+    restart: unless-stopped
