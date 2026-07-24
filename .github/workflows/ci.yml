@@ -46,10 +46,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt pytest pytest-asyncio
       - name: Initialize Tables
+        env:
+          DATABASE_URL: sqlite:///./app.db
+          JWT_SECRET: mock-jwt-secret-key-for-testing-purposes-123
         run: |
           cd backend
           python -m app.database.create_tables
       - name: Run Test Suite
+        env:
+          DATABASE_URL: sqlite:///:memory:
+          JWT_SECRET: mock-jwt-secret-key-for-testing-purposes-123
         run: |
           cd backend
           python -m pytest
